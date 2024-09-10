@@ -26,7 +26,6 @@ jobs:
 
     # CREATE SQL file
     - name: Set Create Action
-      if: github.event.inputs.action == 'create'
       run: |
         echo "create" > action.txt
       env:
@@ -35,7 +34,6 @@ jobs:
 
     # READ SQL file
     - name: Set Read Action
-      if: github.event.inputs.action == 'read'
       run: |
         echo "read" > action.txt
       env:
@@ -44,7 +42,6 @@ jobs:
 
     # UPDATE SQL file
     - name: Set Update Action
-      if: github.event.inputs.action == 'update'
       run: |
         echo "update" > action.txt
       env:
@@ -53,7 +50,6 @@ jobs:
 
     # DELETE SQL file
     - name: Set Delete Action
-      if: github.event.inputs.action == 'delete'
       run: |
         echo "delete" > action.txt
       env:
