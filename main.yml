@@ -1,0 +1,70 @@
+name: CRUD SQL File Operations
+
+on:
+  workflow_dispatch: # Manually trigger the workflow from the Actions tab
+
+jobs:
+  sql_crud_job:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v3
+
+    - name: Set up Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: '3.x'
+
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        python -m pip install requests
+
+    # CREATE SQL file
+    - name: Create SQL File
+      run: |
+        echo "create" > action.txt
+      env:
+        GITHUB_TOKEN: ${{ secrets.TOKEN }}
+        GITHUB_REPOSITORY: ${{ github.repository }}
+        ACTION: "create"
+      continue-on-error: true
+
+    # READ SQL file
+    - name: Read SQL File
+      run: |
+        echo "read" > action.txt
+      env:
+        GITHUB_TOKEN: ${{ secrets.TOKEN }}
+        GITHUB_REPOSITORY: ${{ github.repository }}
+        ACTION: "read"
+      continue-on-error: true
+
+    # UPDATE SQL file
+    - name: Update SQL File
+      run: |
+        echo "update" > action.txt
+      env:
+        GITHUB_TOKEN: ${{ secrets.TOKEN }}
+        GITHUB_REPOSITORY: ${{ github.repository }}
+        ACTION: "update"
+      continue-on-error: true
+
+    # DELETE SQL file
+    - name: Delete SQL File
+      run: |
+        echo "delete" > action.txt
+      env:
+        GITHUB_TOKEN: ${{ secrets.TOKEN }}
+        GITHUB_REPOSITORY: ${{ github.repository }}
+        ACTION: "delete"
+      continue-on-error: true
+
+    - name: Run CRUD Operations
+      run: |
+        python crud_sql_operations.py
+      env:
+        GITHUB_TOKEN: ${{ secrets.TOKEN }}
+        GITHUB_REPOSITORY: ${{ github.repository }}
+        ACTION: $(cat action.txt)
