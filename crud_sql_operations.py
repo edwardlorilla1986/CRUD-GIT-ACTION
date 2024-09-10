@@ -3,8 +3,8 @@ import json
 import requests
 import os
 
-GITHUB_TOKEN = os.getenv('GITHUB_TOKEN')
-REPO = os.getenv('GITHUB_REPOSITORY')
+GITHUB_TOKEN = os.getenv('TOKEN')
+REPO = os.getenv('REPOSITORY')
 BRANCH = "main"
 BASE_URL = f"https://api.github.com/repos/{REPO}/contents/database.sql"
 
